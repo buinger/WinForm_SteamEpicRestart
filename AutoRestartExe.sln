@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRestartExe", "AutoRestartExe\AutoRestartExe.csproj", "{11836434-F37C-4538-AB5A-AAD0D97F7FCB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11836434-F37C-4538-AB5A-AAD0D97F7FCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11836434-F37C-4538-AB5A-AAD0D97F7FCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11836434-F37C-4538-AB5A-AAD0D97F7FCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11836434-F37C-4538-AB5A-AAD0D97F7FCB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {15BEF59C-1935-4AEA-A5DD-08C3C821C9B4}
+	EndGlobalSection
+EndGlobal
