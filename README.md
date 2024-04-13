@@ -1,0 +1,2 @@
+# WinForm_SteamEpicRestart
+控制steam和epic游戏定时重启的软件
