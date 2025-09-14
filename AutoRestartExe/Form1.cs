@@ -69,7 +69,7 @@ namespace AutoRestartExe
 
         async Task DoJianKong(int rSecond, int wSecond)
         {
-            infoBox.Text = "开始监控";
+            infoBox.Text = lanTexts[4];
             proName_Input.ReadOnly = true;
             gameId_Input.ReadOnly = true;
             runTime_Input.ReadOnly = true;
@@ -77,7 +77,8 @@ namespace AutoRestartExe
             gameIdToogle.Enabled = false;
 
             jianKongSwitch = true;
-            startButton.Text = "正在监控(点击停止)";
+            startButton.Text = lanTexts[30];
+            
             startButton.ForeColor = Color.Green;
 
             int fullPass = 0, runPass = 0, waitPass = 0;
@@ -90,14 +91,14 @@ namespace AutoRestartExe
                 //infoBox.Text = "";
                 if (CheckIsRun())
                 {
-                    infoBox.Text = "游戏运行中\n";
+                    infoBox.Text = lanTexts[8]+"\n";
                     runPass += 1;
 
 
-                    infoBox.Text += "运行时长:" + GetTimeStr(runPass) + "\n";
+                    infoBox.Text += lanTexts[9]+ ":" + GetTimeStr(runPass) + "\n";
 
 
-                    infoBox.Text += "还剩" + GetTimeStr(rSecond - runPass) + "关闭游戏";
+                    infoBox.Text += lanTexts[10] + GetTimeStr(rSecond - runPass) + lanTexts[11];
                     if (runPass >= rSecond)
                     {
                         runPass = 0;
@@ -117,14 +118,14 @@ namespace AutoRestartExe
                     //}
                     //else
                     //{
-                    infoBox.Text = "游戏已关闭\n";
+                    infoBox.Text = lanTexts[12]+"\n";
                     waitPass += 1;
 
 
-                    infoBox.Text += "休息时长:" + GetTimeStr(waitPass) + "\n";
+                    infoBox.Text += lanTexts[13] + ":" + GetTimeStr(waitPass) + "\n";
 
 
-                    infoBox.Text += "还剩" + GetTimeStr(wSecond - waitPass) + "开启游戏";
+                    infoBox.Text += lanTexts[10] + GetTimeStr(wSecond - waitPass) + lanTexts[14];
                     if (waitPass >= wSecond)
                     {
                         runPass = 0;
@@ -149,11 +150,11 @@ namespace AutoRestartExe
             int sec = fullSec % 60;
             if (min == 0)
             {
-                return sec + "秒";
+                return sec + lanTexts[32];
             }
             else
             {
-                return min + "分" + sec + "秒";
+                return min + lanTexts[31] + sec + lanTexts[32];
             }
 
         }
@@ -179,7 +180,7 @@ namespace AutoRestartExe
         void EndJianKong()
         {
             jianKongSwitch = false;
-            startButton.Text = "开始监控";
+            startButton.Text = lanTexts[7];
             startButton.ForeColor = Color.Black;
             proName_Input.ReadOnly = false;
             gameId_Input.ReadOnly = false;
@@ -202,20 +203,20 @@ namespace AutoRestartExe
             {
                 if (!jianKong.IsCompleted)
                 {
-                    MessageBox.Show("监控进程还在运行，请稍后重试");
+                    MessageBox.Show(lanTexts[15]);
                     return;
                 }
             }
             int rTime, wTime;
             if (!int.TryParse(runTime_Input.Text, out rTime))
             {
-                MessageBox.Show("运行时间填写错误，请检查");
+                MessageBox.Show(lanTexts[16]);
                 return;
             }
 
             if (!int.TryParse(waitTime_Input.Text, out wTime))
             {
-                MessageBox.Show("休息时间填写错误，请检查");
+                MessageBox.Show(lanTexts[17]);
                 return;
             }
 
@@ -247,14 +248,14 @@ namespace AutoRestartExe
                 }
                 else
                 {
-                    MessageBox.Show(proName_Input.Text + ".exe：未运行，请运行后再点击开始");
+                    MessageBox.Show(proName_Input.Text + ".exe："+ lanTexts[18]);
                     return;
                 }
 
             }
             else
             {
-                MessageBox.Show("进程名不能为空");
+                MessageBox.Show(lanTexts[19]);
                 return;
             }
 
@@ -281,7 +282,7 @@ namespace AutoRestartExe
                     Process[] processes = Process.GetProcessesByName("Steam");
                     if (processes.Length == 0)
                     {
-                        MessageBox.Show("未检测到steam程序");
+                        MessageBox.Show(lanTexts[20]);
                         return false;
                     }
                     steamPath = processes[0]?.MainModule?.FileName;
@@ -299,7 +300,7 @@ namespace AutoRestartExe
                     }
                     if (fullName == "")
                     {
-                        MessageBox.Show("未找到游戏的路径，请检查游戏名是否正确");
+                        MessageBox.Show(lanTexts[21]);
                         return false;
                     }
 
@@ -313,7 +314,7 @@ namespace AutoRestartExe
                 }
                 else
                 {
-                    MessageBox.Show(proName_Input.Text + ".exe：未运行，请运行后在点击开始");
+                    MessageBox.Show(proName_Input.Text + ".exe："+ lanTexts[22]);
                     return false;
                 }
 
@@ -330,7 +331,7 @@ namespace AutoRestartExe
                     Process[] processes = Process.GetProcessesByName("EpicGamesLauncher");
                     if (processes.Length == 0)
                     {
-                        MessageBox.Show("未检测到 Epic Games 客户端程序");
+                        MessageBox.Show(lanTexts[23]);
                         return false;
                     }
                     epicPath = processes[0]?.MainModule?.FileName;
@@ -350,7 +351,7 @@ namespace AutoRestartExe
                     }
                     if (fullName == "")
                     {
-                        MessageBox.Show("未找到游戏的路径，请检查游戏名是否正确");
+                        MessageBox.Show(lanTexts[24]);
                         return false;
                     }
 
@@ -363,7 +364,7 @@ namespace AutoRestartExe
                 }
                 else
                 {
-                    MessageBox.Show(proName_Input.Text + ".exe：未运行，请运行后再点击开始");
+                    MessageBox.Show(proName_Input.Text + ".exe："+ lanTexts[18]);
                     return false;
                 }
 
@@ -375,7 +376,7 @@ namespace AutoRestartExe
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            if (startButton.Text != "正在监控(点击停止)")
+            if (startButton.Text != lanTexts[25])
             {
                 CheckAndDoJianKong();
             }
@@ -417,7 +418,7 @@ namespace AutoRestartExe
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"保存数据时出错：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(lanTexts[33] + $"：{ex.Message}", lanTexts[27], MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -443,7 +444,7 @@ namespace AutoRestartExe
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"加载数据时出错：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(lanTexts[26]+$"：{ex.Message}", lanTexts[27], MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return "";
             }
         }
@@ -473,13 +474,13 @@ namespace AutoRestartExe
         {
             if (gameIdToogle.Checked == true)
             {
-                gameIdToogle.Text = "Epic游戏ID";
+                gameIdToogle.Text = lanTexts[28];
                 gameId_Input.Text = lastDates[4];
                 proName_Input.Text = lastDates[6];
             }
             else
             {
-                gameIdToogle.Text = "Steam游戏ID";
+                gameIdToogle.Text = lanTexts[29];
                 gameId_Input.Text = lastDates[3];
                 proName_Input.Text = lastDates[0];
             }

@@ -1,7 +1,12 @@
-﻿namespace AutoRestartExe
+﻿using System.Text;
+
+namespace AutoRestartExe
 {
     partial class Form1
     {
+
+        public static string[] lanTexts;
+
         /// <summary>
         ///  Required designer variable.
         /// </summary>
@@ -28,6 +33,32 @@
         /// </summary>
         private void InitializeComponent()
         {
+
+            //读取文本
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string filePath = Path.Combine(currentDirectory, "语言配置.txt");
+            string lanText = "";
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    string content = File.ReadAllText(filePath, Encoding.UTF8); // 根据文件编码调整
+                    lanText = content; // 假设你有一个名为textBox1的文本框
+                }
+                else
+                {
+                    MessageBox.Show("文件不存在！");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"读取文件时出错: {ex.Message}");
+            }
+            lanTexts = lanText.Split('|');
+
+
+
+
             proName_Input = new TextBox();
             proName = new Label();
             runTime = new Label();
@@ -40,6 +71,9 @@
             infoBox = new RichTextBox();
             label1 = new Label();
             SuspendLayout();
+
+            
+
             // 
             // proName_Input
             // 
@@ -55,7 +89,7 @@
             proName.Name = "proName";
             proName.Size = new Size(198, 31);
             proName.TabIndex = 1;
-            proName.Text = "进程名(无需后缀)";
+            proName.Text = lanTexts[1];
             // 
             // runTime
             // 
@@ -64,7 +98,7 @@
             runTime.Name = "runTime";
             runTime.Size = new Size(150, 31);
             runTime.TabIndex = 3;
-            runTime.Text = "运行时间(分)";
+            runTime.Text = lanTexts[2];
             // 
             // runTime_Input
             // 
@@ -80,7 +114,7 @@
             waitTime.Name = "waitTime";
             waitTime.Size = new Size(150, 31);
             waitTime.TabIndex = 5;
-            waitTime.Text = "休息时间(分)";
+            waitTime.Text = lanTexts[3];
             // 
             // waitTime_Input
             // 
@@ -96,7 +130,7 @@
             startButton.Name = "startButton";
             startButton.Size = new Size(216, 39);
             startButton.TabIndex = 6;
-            startButton.Text = "开始监控";
+            startButton.Text = lanTexts[4];
             startButton.UseVisualStyleBackColor = true;
             startButton.Click += StartButton_Click;
             // 
@@ -115,7 +149,7 @@
             gameIdToogle.Name = "gameIdToogle";
             gameIdToogle.Size = new Size(191, 35);
             gameIdToogle.TabIndex = 11;
-            gameIdToogle.Text = "Steam游戏ID";
+            gameIdToogle.Text = lanTexts[5];
             gameIdToogle.UseVisualStyleBackColor = true;
             gameIdToogle.CheckedChanged += checkBox1_CheckedChanged;
             // 
@@ -128,6 +162,7 @@
             infoBox.Size = new Size(216, 141);
             infoBox.TabIndex = 12;
             infoBox.Text = "";
+            //infoBox.Text = lanText;
             // 
             // label1
             // 
@@ -136,7 +171,7 @@
             label1.Name = "label1";
             label1.Size = new Size(203, 31);
             label1.TabIndex = 13;
-            label1.Text = "q群：756479074";
+            label1.Text = lanTexts[6];
             // 
             // Form1
             // 
@@ -155,7 +190,7 @@
             Controls.Add(proName);
             Controls.Add(proName_Input);
             Name = "Form1";
-            Text = "HM watchdog";
+            Text = lanTexts[0];
             FormClosed += Form1_FormClosed;
             ResumeLayout(false);
             PerformLayout();
