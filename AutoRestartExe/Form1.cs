@@ -1,5 +1,6 @@
 using Microsoft.Win32;
 using System.Diagnostics;
+using System.Text;
 
 namespace AutoRestartExe
 {
@@ -10,6 +11,28 @@ namespace AutoRestartExe
         string epicPath = "";
         public Form1()
         {
+            //读取文本
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string filePath = Path.Combine(currentDirectory, "语言配置.txt");
+            string lanText = "";
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    string content = File.ReadAllText(filePath, Encoding.UTF8); // 根据文件编码调整
+                    lanText = content; // 假设你有一个名为textBox1的文本框
+                }
+                else
+                {
+                    MessageBox.Show("文件不存在！");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"读取文件时出错: {ex.Message}");
+            }
+            lanTexts = lanText.Split('|');
+
             InitializeComponent();
             string targetData = LoadDataFromFile();
             //Debug.WriteLine("----------------------!!!!!!!!!");
