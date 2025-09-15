@@ -4,7 +4,6 @@ namespace AutoRestartExe
 {
     partial class Form1
     {
-
         public static string[] lanTexts;
 
         /// <summary>
@@ -41,18 +40,22 @@ namespace AutoRestartExe
 
             proName_Input = new TextBox();
             proName = new Label();
+            proName.Font = new Font("Arial", 8f, FontStyle.Bold);
             runTime = new Label();
+            runTime.Font= new Font("Arial", 8f, FontStyle.Bold);
             runTime_Input = new TextBox();
             waitTime = new Label();
+            waitTime.Font = new Font("Arial", 8f, FontStyle.Bold);
             waitTime_Input = new TextBox();
             startButton = new Button();
             gameId_Input = new TextBox();
             gameIdToogle = new CheckBox();
             infoBox = new RichTextBox();
             label1 = new Label();
+            label1.Font = new Font("Arial", 7f, FontStyle.Bold);
             SuspendLayout();
+            gameIdToogle.Font = new Font("Arial", 8f, FontStyle.Bold);
 
-            
 
             // 
             // proName_Input
@@ -67,9 +70,12 @@ namespace AutoRestartExe
             proName.AutoSize = true;
             proName.Location = new Point(12, 22);
             proName.Name = "proName";
-            proName.Size = new Size(198, 31);
+            proName.Size = new Size(230, 31);
+            //proName.MaximumSize = new Size(230, 100);
             proName.TabIndex = 1;
             proName.Text = lanTexts[1];
+
+            
             // 
             // runTime
             // 

@@ -21,6 +21,7 @@ namespace AutoRestartExe
                 {
                     string content = File.ReadAllText(filePath, Encoding.UTF8); // 根据文件编码调整
                     lanText = content; // 假设你有一个名为textBox1的文本框
+                    lanText = lanText.Replace('*', '\n');
                 }
                 else
                 {
@@ -44,6 +45,8 @@ namespace AutoRestartExe
 
                 runTime_Input.Text = datas[1];
                 waitTime_Input.Text = datas[2];
+
+
 
                 if (datas[5] == "False")
                 {
@@ -101,7 +104,7 @@ namespace AutoRestartExe
 
             jianKongSwitch = true;
             startButton.Text = lanTexts[30];
-            
+
             startButton.ForeColor = Color.Green;
 
             int fullPass = 0, runPass = 0, waitPass = 0;
@@ -114,11 +117,11 @@ namespace AutoRestartExe
                 //infoBox.Text = "";
                 if (CheckIsRun())
                 {
-                    infoBox.Text = lanTexts[8]+"\n";
+                    infoBox.Text = lanTexts[8] + "\n";
                     runPass += 1;
 
 
-                    infoBox.Text += lanTexts[9]+ ":" + GetTimeStr(runPass) + "\n";
+                    infoBox.Text += lanTexts[9] + ":" + GetTimeStr(runPass) + "\n";
 
 
                     infoBox.Text += lanTexts[10] + GetTimeStr(rSecond - runPass) + lanTexts[11];
@@ -141,7 +144,7 @@ namespace AutoRestartExe
                     //}
                     //else
                     //{
-                    infoBox.Text = lanTexts[12]+"\n";
+                    infoBox.Text = lanTexts[12] + "\n";
                     waitPass += 1;
 
 
@@ -271,7 +274,7 @@ namespace AutoRestartExe
                 }
                 else
                 {
-                    MessageBox.Show(proName_Input.Text + ".exe："+ lanTexts[18]);
+                    MessageBox.Show(proName_Input.Text + ".exe：" + lanTexts[18]);
                     return;
                 }
 
@@ -337,7 +340,7 @@ namespace AutoRestartExe
                 }
                 else
                 {
-                    MessageBox.Show(proName_Input.Text + ".exe："+ lanTexts[22]);
+                    MessageBox.Show(proName_Input.Text + ".exe：" + lanTexts[22]);
                     return false;
                 }
 
@@ -387,7 +390,7 @@ namespace AutoRestartExe
                 }
                 else
                 {
-                    MessageBox.Show(proName_Input.Text + ".exe："+ lanTexts[18]);
+                    MessageBox.Show(proName_Input.Text + ".exe：" + lanTexts[18]);
                     return false;
                 }
 
@@ -467,7 +470,7 @@ namespace AutoRestartExe
             }
             catch (Exception ex)
             {
-                MessageBox.Show(lanTexts[26]+$"：{ex.Message}", lanTexts[27], MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(lanTexts[26] + $"：{ex.Message}", lanTexts[27], MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return "";
             }
         }
